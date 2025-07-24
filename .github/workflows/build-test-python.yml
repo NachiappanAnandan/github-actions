@@ -1,0 +1,22 @@
+name: PYTHON BUILD AND TEST
+on: 
+  push:
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: CHECKOUT FILES
+        uses: actions/checkout@v4
+      - name: SETUP PYTHON
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13' 
+      - name: INSTALL DEPENDENCIES
+        working-directory: ./03-real-apps/python-app
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: BUILD PROJECT
+        working-directory: ./03-real-apps/python-app
+        run: python app.py
